@@ -1,0 +1,27 @@
+# APIキー・環境変数
+.env
+*.env
+
+# Pythonキャッシュ
+__pycache__/
+*.pyc
+*.pyo
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 結果ファイル（任意）
+results.csv
+
+# 仮想環境
+.venv/
+venv/
+env/
+
+# 出力ファイル
+output.txt
+results.csv
