@@ -24,11 +24,11 @@ def delete_company(company_name):
     if result.total > 0:
         company_id = result.results[0].id
         hubspot_client.crm.companies.basic_api.archive(company_id=company_id)
-        print(f"✅ 削除：{company_name}")
+        print(f" 削除：{company_name}")
     else:
-        print(f"⏭️  スキップ（未登録）：{company_name}")
+        print(f" スキップ（未登録）：{company_name}")
 
-print("🗑️  デモデータをリセット中...")
+print("  デモデータをリセット中...")
 for name in DEMO_COMPANIES:
     delete_company(name)
-print("✅ リセット完了！pipeline.pyを実行できます")
+print(" リセット完了！pipeline.pyを実行できます")

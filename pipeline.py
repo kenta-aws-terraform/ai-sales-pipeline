@@ -40,7 +40,7 @@ def load_leads_from_csv(filepath):
         reader = csv.DictReader(f)
         for row in reader:
             leads.append(row)
-    print(f"✅ {len(leads)}社のリードをCSVから読み込みました")
+    print(f" {len(leads)}社のリードをCSVから読み込みました")
     return leads
 
 def company_exists_in_hubspot(company_name):
@@ -118,11 +118,11 @@ def save_results_to_csv(results, filepath="results.csv"):
         ])
         writer.writeheader()
         writer.writerows(results)
-    print(f"\n✅ results.csvに結果を保存しました")
+    print(f"\n results.csvに結果を保存しました")
 
 def run_pipeline():
     print("=" * 50)
-    print("🚀 AI営業自動化パイプライン 起動")
+    print(" AI営業自動化パイプライン 起動")
     print("=" * 50)
 
     # Step1: CSVからリード読み込み
@@ -140,7 +140,7 @@ def run_pipeline():
 
         # Step2: HubSpot重複チェック
         if company_exists_in_hubspot(company_name):
-            print(f"  ⏭️  スキップ（HubSpotに登録済み）")
+            print(f"  ⏭  スキップ（HubSpotに登録済み）")
             results.append({
                 "company_name": company_name,
                 "industry": industry,
@@ -154,7 +154,7 @@ def run_pipeline():
             continue
 
         # Step3: AIでメール生成＋スコアリング
-        print(f"  🤖 AIでメール生成・スコアリング中...")
+        print(f"   AIでメール生成・スコアリング中...")
         ai_result = generate_email_and_score(
             company_name, industry, employee_count, annual_revenue
         )
@@ -163,15 +163,15 @@ def run_pipeline():
         email_subject = ai_result["subject"]
         email_body = ai_result["email_body"]
 
-        print(f"  📊 スコア：{score}点 - {score_reason}")
-        print(f"  📧 件名：{email_subject}")
+        print(f"   スコア：{score}点 - {score_reason}")
+        print(f"   件名：{email_subject}")
 
         # Step4: HubSpotに登録
-        print(f"  📥 HubSpotに登録中...")
+        print(f"   HubSpotに登録中...")
         hubspot_id = register_to_hubspot(
             company_name, industry, score, score_reason, email_subject, email_body
         )
-        print(f"  ✅ 登録完了（ID：{hubspot_id}）")
+        print(f"   登録完了（ID：{hubspot_id}）")
 
         results.append({
             "company_name": company_name,
@@ -191,13 +191,13 @@ def run_pipeline():
     success = len([r for r in results if r["status"] == "success"])
     skipped = len([r for r in results if r["status"] == "skipped"])
     print(f"\n{'=' * 50}")
-    print(f"🎉 パイプライン完了！")
+    print(f" パイプライン完了！")
     print(f"   新規登録：{success}社 / スキップ：{skipped}社")
     if results:
         scored = [r for r in results if r["score"] != "-"]
         if scored:
             top = max(scored, key=lambda x: int(x["score"]))
-            print(f"   🏆 最優先リード：{top['company_name']}（{top['score']}点）")
+            print(f"    最優先リード：{top['company_name']}（{top['score']}点）")
     print(f"{'=' * 50}")
 
 if __name__ == "__main__":

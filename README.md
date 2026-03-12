@@ -41,7 +41,6 @@ ai-sales-pipeline/
 ├── reset_demo.py    # デモ用リセットスクリプト
 ├── leads.csv        # リードリスト（インプット）
 ├── results.csv      # 処理結果（自動生成）
-├── .env.example     # 環境変数のサンプル
 └── README.md
 ```
 
@@ -49,7 +48,7 @@ ai-sales-pipeline/
 
 ### 1. リポジトリをクローン
 ```bash
-git clone https://github.com/あなたのユーザー名/ai-sales-pipeline.git
+git clone https://github.com/ユーザー名/ai-sales-pipeline.git
 cd ai-sales-pipeline
 ```
 
@@ -59,10 +58,7 @@ pip install groq hubspot-api-client python-dotenv
 ```
 
 ### 3. 環境変数を設定
-```bash
-cp .env.example .env
-```
-`.env`ファイルにAPIキーを入力：
+`.env`ファイルをプロジェクトルートに作成し、以下を入力：
 ```
 GROQ_API_KEY=your_groq_api_key
 HUBSPOT_TOKEN=your_hubspot_token
@@ -86,6 +82,3 @@ python pipeline.py
    新規登録：5社 / スキップ：0社
     最優先リード：山田フィナンシャル（85点）
 ```
-```
-
----
